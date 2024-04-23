@@ -52,5 +52,25 @@ function obtenerDatosUsuario() {
     console.log(`¡Hola, ${nombreUsuario}! El costo total del viaje a ${destinoUsuario} es: $${costoTotalViaje.toFixed(2)}`);
     alert(`¡Hola, ${nombreUsuario}! El costo total del viaje a ${destinoUsuario} es: $${costoTotalViaje.toFixed(2)}`);
 }
+function calcularPresupuesto(nombreUsuario, destinoUsuario, costoPorNoche, cantidadNoches, costoTransporte, costoComidasDiarias, costoExcursiones, transporteElegido) {
+    let costoTotal = costoPorNoche * cantidadNoches;
 
+    switch (transporteElegido) {
+        case 1: 
+            costoTotal += costoTransporte * 2;
+            break;
+        case 2: 
+        case 3: 
+        case 4: 
+            costoTotal += costoTransporte;
+            break;
+        default:
+            console.log("Tipo de transporte no válido");
+            return 0;
+    }
+
+    costoTotal += (costoComidasDiarias * cantidadNoches) + costoExcursiones;
+
+    return costoTotal;
+}
 obtenerDatosUsuario();
