@@ -5,18 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Presupuesto de Viaje</title>
     <link rel="stylesheet" href="styles.css">
-    <script src="script.js" defer></script>
 </head>
 <body>
-    <p><b>Es una planilla para calcular los gastos de un viaje por diferentes destinos</b></p>
+    
     <div class="container">
-        <h1><strong>Presupuesto de Viaje</strong></h1>
         <form id="travelForm">
             <div class="form-group">
                 <label for="name"><b>Nombre:</b></label>
                 <input type="text" id="name" name="name" required placeholder="Ingrese su nombre">
+            </div>
+            <div class="form-group">
                 <label for="destination"><b>Destino:</b></label>
-                <input type="text" id="destination" name="destination" required placeholder="Ingrese un destino">
+                <select id="destination" name="destination" required>
+                    <option value="" disabled selected>Ingrese destino</option>
+                </select>
             </div>
             <div class="form-group">
                 <label for="duration"><b>Duración de la estadía (días):</b></label>
@@ -28,7 +30,8 @@
             </div>
             <div class="form-group">
                 <label for="transportType"><b>Tipo de transporte:</b></label>
-                <select id="transportType" name="transportType">
+                <select id="transportType" name="transportType" required>
+                    <option value="" disabled selected>Ingrese el transporte</option>
                     <option value="1">Avión</option>
                     <option value="2">Tren</option>
                     <option value="3">Autobús</option>
@@ -52,7 +55,19 @@
                 <input type="number" id="variosCost" name="variosCost" required>
             </div>
             <button type="submit">Calcular Presupuesto</button>
+            <div id="resultadoContainer" class="card hidden">
+                <div class="card-body">
+                    <h5 class="card-title">¡Hola, <span id="userName"></span>!</h5>
+                    <p class="card-text">El costo total del viaje a <span id="destinationName"></span> en <span id="continentName"></span> es: <span id="totalCost"></span></p>
+                </div>
+            </div>
+            
         </form>
     </div>
+</div>
+
+<script src="script.js" defer></script>
+</div>
+
 </body>
 </html>

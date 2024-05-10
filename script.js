@@ -1,58 +1,91 @@
-function obtenerDatosUsuario() {
-    const nombreUsuario = prompt("Por favor, ingrese su nombre:");
-    if (!nombreUsuario || !isNaN(nombreUsuario)) {
-        console.log("Por favor, ingrese un nombre válido.");
-        return;
+document.addEventListener("DOMContentLoaded", function() {
+    const destinos = [
+        {
+            continente: "América",
+            paises: ["Argentina", "Brasil", "Estados Unidos", "Uruguay", "México"]
+        },
+        {
+            continente: "Europa",
+            paises: ["España", "Francia", "Italia", "Alemania", "Reino Unido"]
+        },
+        
+    ];
+
+    const selectDestino = document.getElementById("destination");
+
+    
+    destinos.forEach(destino => {
+        const optgroup = document.createElement("optgroup");
+        optgroup.label = destino.continente;
+        destino.paises.forEach(pais => {
+            const opcion = document.createElement("option");
+            opcion.value = pais;
+            opcion.textContent = pais;
+            optgroup.appendChild(opcion);
+        });
+        selectDestino.appendChild(optgroup);
+    });
+
+    
+    const selectTransporte = document.getElementById("transportType");
+    if (selectTransporte.children.length === 0) {
+        const opcionesTransporte = ["Avión", "Tren", "Autobús", "Coche"];
+
+        opcionesTransporte.forEach((opcion, indice) => {
+            const elementoOpcion = document.createElement("option");
+            elementoOpcion.value = indice + 1;
+            elementoOpcion.textContent = opcion;
+            selectTransporte.appendChild(elementoOpcion);
+        });
     }
 
-    const destinoUsuario = prompt("Por favor, ingrese el destino de su viaje:");
-    if (!destinoUsuario || !isNaN(destinoUsuario)) {
-        console.log("Por favor, ingrese un destino válido.");
-        return;
-    }
+    const formularioViaje = document.getElementById("travelForm");
 
-    const transporteElegido = parseInt(prompt("Por favor, seleccione el número correspondiente al tipo de transporte:\n1. Avión\n2. Tren\n3. Autobús\n4. Coche"));
+    formularioViaje.addEventListener("submit", function(evento) {
+        evento.preventDefault();
+        const nombreUsuario = document.getElementById("name").value;
+        const continente = document.getElementById("destination").selectedOptions[0].parentNode.label;
+        const destino = document.getElementById("destination").value;
+        const costoPorNocheUsuario = parseFloat(document.getElementById("hotelCost").value);
+        const cantidadNochesUsuario = parseInt(document.getElementById("duration").value);
+        const costoTransporteUsuario = parseFloat(document.getElementById("transportCost").value);
+        const costoComidasUsuario = parseFloat(document.getElementById("comidasCost").value);
+        const costoExcursionesUsuario = parseFloat(document.getElementById("excursionCost").value);
+        const transporteElegido = parseInt(document.getElementById("transportType").value);
+        
+        const costoTotalViaje = calcularPresupuestoTotal(costoPorNocheUsuario, cantidadNochesUsuario, costoTransporteUsuario, costoComidasUsuario, costoExcursionesUsuario, transporteElegido);
 
-    if (transporteElegido < 1 || transporteElegido > 4) {
-        console.log("Por favor, seleccione un número válido de la lista.");
-        return;
-    }
+        
+        const datosViaje = {
+            nombreUsuario,
+            continente,
+            destino,
+            costoTotalViaje
+        };
+        localStorage.setItem("datosViaje", JSON.stringify(datosViaje));
 
-    const costoPorNocheUsuario = parseFloat(prompt("Por favor, ingrese el costo por noche de alojamiento:"));
-    if (isNaN(costoPorNocheUsuario) || costoPorNocheUsuario <= 0) {
-        console.log("Por favor, ingrese un costo por noche válido.");
-        return;
-    }
+        
+        mostrarResultado(nombreUsuario, destino, continente, costoTotalViaje);
+        
+    });
+});
 
-    const cantidadNochesUsuario = parseInt(prompt("Por favor, ingrese la cantidad de noches de estadía:"));
-    if (isNaN(cantidadNochesUsuario) || cantidadNochesUsuario <= 0) {
-        console.log("Por favor, ingrese una cantidad de noches válida.");
-        return;
-    }
-
-    const costoTransporteUsuario = parseFloat(prompt("Por favor, ingrese el costo del transporte:"));
-    if (isNaN(costoTransporteUsuario) || costoTransporteUsuario < 0) {
-        console.log("Por favor, ingrese un costo de transporte válido.");
-        return;
-    }
-
-    const costoComidasUsuario = parseFloat(prompt("Por favor, ingrese el costo diario de comidas por persona:"));
-    if (isNaN(costoComidasUsuario) || costoComidasUsuario < 0) {
-        console.log("Por favor, ingrese un costo de comidas válido.");
-        return;
-    }
-
-    const costoExcursionesUsuario = parseFloat(prompt("Por favor, ingrese el costo de las excursiones adicionales:"));
-    if (isNaN(costoExcursionesUsuario) || costoExcursionesUsuario < 0) {
-        console.log("Por favor, ingrese un costo de excursiones válido.");
-        return;
-    }
-
-    const costoTotalViaje = calcularPresupuesto(nombreUsuario, destinoUsuario, costoPorNocheUsuario, cantidadNochesUsuario, costoTransporteUsuario, costoComidasUsuario, costoExcursionesUsuario, transporteElegido);
-    console.log(`¡Hola, ${nombreUsuario}! El costo total del viaje a ${destinoUsuario} es: $${costoTotalViaje.toFixed(2)}`);
-    alert(`¡Hola, ${nombreUsuario}! El costo total del viaje a ${destinoUsuario} es: $${costoTotalViaje.toFixed(2)}`);
+function mostrarResultado(nombreUsuario, destino, continente, costoTotalViaje) {
+    const resultadoContainer = document.getElementById("resultadoContainer");
+    resultadoContainer.classList.remove("hidden"); 
+    resultadoContainer.innerHTML = `
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">¡Hola, ${nombreUsuario}!</h5>
+                <p class="card-text">El costo total del viaje a ${destino} en ${continente} es: $${costoTotalViaje.toFixed(2)}</p>
+            </div>
+        </div>
+    `;
+    console.log("¡Hola, " + nombreUsuario + "! El costo total del viaje a " + destino + " en "+ continente +" es: $" + costoTotalViaje.toFixed(2));
 }
-function calcularPresupuesto(nombreUsuario, destinoUsuario, costoPorNoche, cantidadNoches, costoTransporte, costoComidasDiarias, costoExcursiones, transporteElegido) {
+
+
+function calcularPresupuestoTotal(costoPorNoche, cantidadNoches, costoTransporte, costoComidasDiarias, costoExcursiones, transporteElegido) {
     let costoTotal = costoPorNoche * cantidadNoches;
 
     switch (transporteElegido) {
@@ -73,4 +106,3 @@ function calcularPresupuesto(nombreUsuario, destinoUsuario, costoPorNoche, canti
 
     return costoTotal;
 }
-obtenerDatosUsuario();
