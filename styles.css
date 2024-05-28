@@ -11,20 +11,37 @@
         margin-top: 30px;
     }
     
-    
     p.subtitulo {
         font-size: 1.1rem;
     }
+
+    .logo {
+        top: 10px;
+        right: 10px;
+        max-width: 80px; /* Ajusta el tamaño del logo en pantallas pequeñas */
+        height: 80px;
+    }
 }
+
 @media screen and (max-width: 480px) {
     .container {
         width: 95%;
         padding: 10px;
     }
 
-    
     p.subtitulo {
         font-size: 1rem;
+    }
+
+    h1 {
+        margin-top: 50px; /* Asegura suficiente espacio para el logo */
+    }
+
+    .logo {
+        top: 10px;
+        right: 10px;
+        max-width: 60px; /* Ajusta el tamaño del logo en pantallas muy pequeñas */
+        height: 60px;
     }
 }
 
@@ -37,6 +54,7 @@ body {
     background-size: cover;
     background-attachment: fixed; 
 }
+
 #clima {
     position: relative;
     top: 0;
@@ -50,10 +68,12 @@ body {
     margin-left: 0; 
     margin-right: auto; 
 }
+
 #header {
     position: relative;
     height: 80px; 
 }
+
 @keyframes rotar {
     0% {
         transform: rotate(0deg);
@@ -75,9 +95,6 @@ body {
 .logo:hover {
     animation: rotar 2s linear; 
 }
-
-
-
 
 .container {
     width: 90%;
@@ -154,5 +171,3 @@ button:hover {
 .hidden {
     display: none;
 }
-
-
