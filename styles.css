@@ -1,11 +1,83 @@
+/* Media queries para adaptabilidad */
+@media screen and (max-width: 768px) {
+    .container {
+        width: 90%;
+        margin: 20px auto;
+        padding: 10px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        margin-top: 30px;
+    }
+    
+    
+    p.subtitulo {
+        font-size: 1.1rem;
+    }
+}
+@media screen and (max-width: 480px) {
+    .container {
+        width: 95%;
+        padding: 10px;
+    }
+
+    
+    p.subtitulo {
+        font-size: 1rem;
+    }
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    background-image: url(./img/venecia1.jpg); 
+    background-image: url(./img/degrade.jpg);
     background-repeat: no-repeat;
     background-size: cover;
+    background-attachment: fixed; 
 }
+#clima {
+    position: relative;
+    top: 0;
+    left: 0;
+    padding: 10px;
+    background-color: #a6d4f3;
+    border: 1px solid #293094;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    max-width: 200px; 
+    margin-left: 0; 
+    margin-right: auto; 
+}
+#header {
+    position: relative;
+    height: 80px; 
+}
+@keyframes rotar {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.logo {
+    position: absolute;
+    top: 10px;
+    right: 30px;
+    max-width: 100px;
+    height: 100px;
+    transition: transform 0.5s ease-in-out;
+}
+
+.logo:hover {
+    animation: rotar 2s linear; 
+}
+
+
+
 
 .container {
     width: 90%;
@@ -13,16 +85,23 @@ body {
     margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
-    background-color: rgba(255, 255, 255, 0.7); 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    
-    opacity: 0.9;
-
+    background-color: rgba(175, 238, 212, 0.432);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    opacity: 0.9;
 }
 
 h1 {
     text-align: center;
+    color: #194a58;
+    margin-bottom: 10px;
+    font-size: 2rem;
+}
+
+p.subtitulo {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    color: #333;
 }
 
 form {
@@ -45,7 +124,7 @@ select {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    box-sizing: border-box; 
+    box-sizing: border-box;
 }
 
 button {
@@ -69,6 +148,7 @@ button:hover {
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-top: 20px;
     padding: 15px;
+    background-color: rgb(170, 181, 192);
 }
 
 .hidden {
@@ -76,16 +156,3 @@ button:hover {
 }
 
 
-@media screen and (max-width: 768px) {
-    .container {
-        width: 90%;
-        margin: 20px auto;
-        padding: 10px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .container {
-        width: 95%;
-    }
-}
