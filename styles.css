@@ -1,4 +1,4 @@
-/* Media queries para adaptabilidad */
+
 @media screen and (max-width: 768px) {
     .container {
         width: 90%;
@@ -18,8 +18,8 @@
     .logo {
         top: 10px;
         right: 10px;
-        max-width: 80px; /* Ajusta el tamaño del logo en pantallas pequeñas */
-        height: 80px;
+        max-width: 70px; 
+        height: 70px;
     }
 }
 
@@ -34,14 +34,14 @@
     }
 
     h1 {
-        margin-top: 50px; /* Asegura suficiente espacio para el logo */
+        margin-top: 50px; 
     }
 
     .logo {
         top: 10px;
         right: 10px;
-        max-width: 60px; /* Ajusta el tamaño del logo en pantallas muy pequeñas */
-        height: 60px;
+        max-width: 50px; 
+        height: 30px;
     }
 }
 
@@ -88,7 +88,7 @@ body {
     top: 10px;
     right: 30px;
     max-width: 100px;
-    height: 100px;
+    height: 70px;
     transition: transform 0.5s ease-in-out;
 }
 
