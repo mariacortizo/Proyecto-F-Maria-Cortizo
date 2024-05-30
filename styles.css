@@ -18,7 +18,7 @@
     .logo {
         top: 10px;
         right: 10px;
-        max-width: 70px; 
+        max-width: 150px; 
         height: 70px;
     }
 }
@@ -43,6 +43,7 @@
         max-width: 50px; 
         height: 30px;
     }
+    
 }
 
 body {
@@ -57,21 +58,21 @@ body {
 
 #clima {
     position: relative;
-    top: 0;
+    top: 10px;
     left: 0;
     padding: 10px;
     background-color: #a6d4f3;
-    border: 1px solid #293094;
-    border-radius: 5px;
+    border: 1px solid #c7c9e4;
+    border-radius: 20px;
     margin-bottom: 20px;
     max-width: 150px; 
-    margin-left: 0; 
+    margin-left: 10px; 
     margin-right: auto; 
 }
 
 #header {
     position: relative;
-    height: 80px; 
+    height: 60px; 
 }
 
 @keyframes rotar {
@@ -85,11 +86,13 @@ body {
 
 .logo {
     position: absolute;
-    top: 10px;
+    top: 20px;
     right: 30px;
     max-width: 100px;
     height: 70px;
+    width: 100px;
     transition: transform 0.5s ease-in-out;
+    border-radius: 60%;
 }
 
 .logo:hover {
@@ -100,8 +103,8 @@ body {
     width: 80%;
     max-width: 600px;
     margin: 50px auto;
-    padding: 20px;
-    border-radius: 10px;
+    padding: 10px;
+    border-radius: 20px;
     background-color: rgba(175, 238, 212, 0.432);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     opacity: 0.9;

@@ -39,7 +39,14 @@ document.addEventListener("DOMContentLoaded", function() {
             return; 
         }
 
-        const costoTotalViaje = calcularPresupuestoTotal(costoPorNocheUsuario, cantidadNochesUsuario, costoTransporteUsuario, costoComidasUsuario, costoExcursionesUsuario, transporteElegido);
+        const costoTotalViaje = calcularPresupuestoTotal(
+            costoPorNocheUsuario, 
+            cantidadNochesUsuario, 
+            costoTransporteUsuario, 
+            costoComidasUsuario, 
+            costoExcursionesUsuario, 
+            transporteElegido
+        );
 
         const datosViaje = {
             nombreUsuario,
@@ -76,24 +83,37 @@ function validarNumerosPositivos(inputs) {
     });
 }
 
-function calcularPresupuestoTotal(costoPorNoche, cantidadNoches, costoTransporte, costoComidasDiarias, costoExcursiones, transporteElegido) {
-    let costoTotal = costoPorNoche * cantidadNoches;
+function calcularPresupuestoTotal(costoPorNoche, cantidadNoches, costoTransporte, costoComidasDiarias, costoExcursionesDiarias, transporteElegido) {
+    let costoAlojamiento = costoPorNoche * cantidadNoches;
+    localStorage.setItem("costoAlojamiento", costoAlojamiento);
+
+    let costoTotal = costoAlojamiento;
 
     switch (transporteElegido) {
-        case 1: 
+        case 1:
             costoTotal += costoTransporte * 2;
+            localStorage.setItem("costoTransporte", costoTransporte * 2);
             break;
-        case 2: 
-        case 3: 
-        case 4: 
+        case 2:
+        case 3:
+        case 4:
             costoTotal += costoTransporte;
+            localStorage.setItem("costoTransporte", costoTransporte);
             break;
         default:
             console.log("Tipo de transporte no válido");
             return 0;
     }
 
-    costoTotal += (costoComidasDiarias * cantidadNoches) + costoExcursiones;
+    let costoComidas = costoComidasDiarias * cantidadNoches;
+    localStorage.setItem("costoComidas", costoComidas);
+    costoTotal += costoComidas;
+
+    let costoExcursiones = costoExcursionesDiarias * cantidadNoches;
+    localStorage.setItem("costoExcursiones", costoExcursiones);
+    costoTotal += costoExcursiones;
+
+    localStorage.setItem("costoTotal", costoTotal);
 
     return costoTotal;
 }
@@ -122,6 +142,4 @@ function mostrarResultado(nombreUsuario, destino, continente, costoTotalViaje, m
         },
         onClick: function(){} 
     }).showToast();
-
-    console.log("¡Hola, " + nombreUsuario + "! El costo total del viaje a " + destino + " en "+ continente +" es: " + costoTotalViaje.toFixed(2) + " " + monedaSeleccionada);
 }
